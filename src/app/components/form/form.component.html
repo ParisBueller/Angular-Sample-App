@@ -1,0 +1,31 @@
+<div class="card">
+  <div class="card-header">
+    User Form
+  </div>
+  <div class="card-body">
+    <form #sampleForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input 
+            type="text"
+            class="form-control"
+            name="email"
+            #userEmail="ngModel"
+            [ngClass]="{'is-invalid':userEmail.errors && userEmail.touched}"
+            [(ngModel)]="user.email"
+            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+            required
+        >
+        <div [hidden]="!userEmail.errors?.required"
+             class="invalid-feedback">
+             Email required
+        </div>
+
+        <div [hidden]="!userEmail.errors?.pattern"
+             class="invalid-feedback">
+             Email is not valid
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
