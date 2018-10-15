@@ -5,6 +5,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 
 import { User } from '../../../models/User';
 
+
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -15,6 +16,8 @@ export class FormComponent implements OnInit {
     email: '',
     password: ''
   }
+
+
 
   @ViewChild('userForm') form: any;
 

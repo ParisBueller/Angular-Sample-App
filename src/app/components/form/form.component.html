@@ -3,7 +3,7 @@
     User Form
   </div>
   <div class="card-body">
-    <form #sampleForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+    <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
       <div class="form-group">
         <label for="email">Email</label>
         <input 
@@ -24,6 +24,31 @@
         <div [hidden]="!userEmail.errors?.pattern"
              class="invalid-feedback">
              Email is not valid
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+            type="text"
+            class="form-control"
+            name="password"
+            #userPassword="ngModel"
+            [ngClass]="{'is-invalid':userPassword.errors && userPassword.touched}"
+            [(ngModel)]="user.password"
+            minlength="8"
+            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$"
+            required
+        >
+
+        <div  [hidden]="!userPassword.errors?.required"
+              class="invalid-feedback">
+              Password Required
+        </div>
+
+        <div [hidden]="!userPassword.errors?.pattern"
+             class="invalid-feedback">
+             Password must include one character and one special character
         </div>
       </div>
     </form>
