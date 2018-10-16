@@ -1,3 +1,4 @@
+<div class="container">
 <div class="card">
   <div class="card-header">
     User Form
@@ -9,6 +10,7 @@
         <input 
             type="text"
             class="form-control"
+            id="form"
             name="email"
             #userEmail="ngModel"
             [ngClass]="{'is-invalid':userEmail.errors && userEmail.touched}"
@@ -29,18 +31,20 @@
 
       <div class="form-group">
         <label for="password">Password</label>
+        <span ><i class="fa fa-eye" (click)="toggleShow()"></i></span>
         <input 
-            type="text"
+            [type]="show ? 'text' : 'password'"
             class="form-control"
+            id="password"
             name="password"
             #userPassword="ngModel"
             [ngClass]="{'is-invalid':userPassword.errors && userPassword.touched}"
             [(ngModel)]="user.password"
             minlength="8"
             pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$"
-            required
+            required           
         >
-
+            
         <div  [hidden]="!userPassword.errors?.required"
               class="invalid-feedback">
               Password Required
@@ -51,6 +55,16 @@
              Password must include one character and one special character
         </div>
       </div>
+
+      <form [formGroup]="subscriptionForm">
+        <div class="form-group">
+          <label for="subscription">Subscription level</label>
+          <select class="form-control" id="subscription" formControlName="subscription">
+            <option *ngFor="let subscription of subscriptions" [value]="subscription" >{{subscription}}</option>
+          </select>
+        </div>
+      </form>
     </form>
   </div>
+</div>
 </div>
