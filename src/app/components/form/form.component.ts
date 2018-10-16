@@ -27,6 +27,8 @@ export class FormComponent implements OnInit {
   default: string = "Advanced";
   subscriptionForm: FormGroup;
 
+  confirm: boolean;
+
 
   @ViewChild('userForm') form: any;
 
@@ -46,8 +48,9 @@ export class FormComponent implements OnInit {
   }
   //clear form field
   clearForm() {
-    alert('Are you sure you want to clear the form fields?');
-    this.formValue = null;
+    if(window.confirm('Are you sure?') == true) {
+      this.formValue = null;
+    }   
   }
 
   //Toggle show/hide password
