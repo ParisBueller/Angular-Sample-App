@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormGroup, FormControl } from '@angular/forms';
 
 import { FlashMessagesService } from 'angular2-flash-messages';
 
 import { User } from '../../../models/User';
-import { FormGroup, FormControl } from '@angular/forms';
+
 
 
 @Component({
@@ -18,12 +19,14 @@ export class FormComponent implements OnInit {
     password: ''
   }
 
+  formValue: string = '';
+
   show: boolean;
 
   subscriptions = [ 'Basic', 'Advanced', 'Pro'];
   default: string = "Advanced";
-
   subscriptionForm: FormGroup;
+
 
   @ViewChild('userForm') form: any;
 
@@ -40,6 +43,11 @@ export class FormComponent implements OnInit {
     }
 
   ngOnInit() {
+  }
+  //clear form field
+  clearForm() {
+    alert('Are you sure you want to clear the form fields?');
+    this.formValue = null;
   }
 
   //Toggle show/hide password
