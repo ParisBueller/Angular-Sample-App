@@ -10,7 +10,6 @@
         <input 
             type="text"
             class="form-control"
-            id="form"
             name="email"
             #userEmail="ngModel"
             [ngClass]="{'is-invalid':userEmail.errors && userEmail.touched}"
@@ -36,7 +35,6 @@
         <input 
             [type]="show ? 'text' : 'password'"
             class="form-control"
-            id="password"
             name="password"
             #userPassword="ngModel"
             [ngClass]="{'is-invalid':userPassword.errors && userPassword.touched}"

@@ -5,8 +5,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { FlashMessagesService } from 'angular2-flash-messages';
 
 import { User } from '../../../models/User';
-
-
+import { FormService } from '../../services/form.service';
 
 @Component({
   selector: 'app-form',
@@ -16,7 +15,8 @@ import { User } from '../../../models/User';
 export class FormComponent implements OnInit {
   user: User = {
     email: '',
-    password: ''
+    password: '',
+    subscription: ''
   }
 
   formValue: string = '';
@@ -29,11 +29,11 @@ export class FormComponent implements OnInit {
 
   confirm: boolean;
 
-
   @ViewChild('userForm') form: any;
-
   constructor(private flashMessage: FlashMessagesService,
-              private router: Router
+              private router: Router,
+              private formservice: FormService
+
     ) { 
       // set show/toggle password 
       this.show = false;
@@ -58,17 +58,21 @@ export class FormComponent implements OnInit {
     this.show = !this.show;
   }
   //submit form
-  onSubmit({valid}: {valid: boolean}) {
+  onSubmit({value,valid}: {valid: boolean, value: User}) {
+
     if (!valid) {
       this.flashMessage.show('Please fill out the form correctly', {
         cssClass: 'alert-danger', timeout: 4000
       });
     } else {
+      console.log('submitted');
+      this.formservice.user = this.user;
+      
         this.flashMessage.show('Success!', {
           cssClass: 'alert-success', timeout: 4000
         });
+        this.router.navigate(['formdata']);
     }
-    //Redirect with router to new page with form values
   }
 
 }
